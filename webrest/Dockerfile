@@ -1,5 +1,5 @@
 FROM ubuntu:latest
-MAINTAINER Helee Rana "heleerana20@gmail.com"
+MAINTAINER Rhea Rai "rheapremrai@gmail.com"
 RUN apt-get update -y
 RUN apt-get install -y python-pip python-dev build-essential
 COPY . /app
