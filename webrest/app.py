@@ -4,7 +4,7 @@ from flask import request
 
 app = Flask(__name__)
 
-chocDB = [
+chocolate = [
     {
         'id': '1001',
         'name': 'Kitkat',
@@ -86,31 +86,31 @@ chocDB = [
 ]
 
 
-@app.route('/chocdb/chocolate', methods=['GET'])
+@app.route('/chocolate', methods=['GET'])
 def getAllChoc():
     return jsonify({'choc': chocDB})
 
 
-@app.route('/chocdb/chocolate/<chocId>', methods=['GET'])
+@app.route('/chocolate/<chocId>', methods=['GET'])
 def getChocID(chocId):
     usr = [choc['title'] for choc in chocDB if (choc['id'] == chocId)]
     return jsonify({'ID': usr})
 
 
-@app.route('/chocdb/chocolate/<chocId>/<choctitle>', methods=['GET'])
+@app.route('/chocolate/<chocId>/<choctitle>', methods=['GET'])
 def getChocTitle(chocId, choctitle):
     usr = [choc['base'] for choc in chocDB if (choc['id'] == chocId) & ((choc['title'] == choctitle))]
     return jsonify({'Base': usr})
 
 
-@app.route('/chocdb/chocolate/<chocId>/<choctitle>/<chocbase>', methods=['GET'])
+@app.route('/chocolate/<chocId>/<choctitle>/<chocbase>', methods=['GET'])
 def getChoc(chocId, choctitle, chocbase):
     usr = [choc for choc in chocDB if
            (choc['id'] == chocId) & ((choc['title'] == choctitle)) & (choc['base'] == chocbase)]
     return jsonify({'choc': usr})
 
 
-@app.route('/chocdb/chocolate/<chocID>', methods=['PUT'])
+@app.route('/chocolate/<chocID>', methods=['PUT'])
 def updateChoc(chocId):
     em = [choc for choc in chocDB if (choc['id'] == chocId)]
     if 'name' in request.json:
@@ -122,7 +122,7 @@ def updateChoc(chocId):
         return jsonify({'choc': em[0]})
 
 
-@app.route('/chocdb/chocolate', methods=['POST'])
+@app.route('/chocolate', methods=['POST'])
 def createChoc():
     dat = {
         'id': request.json['id'],
@@ -134,7 +134,7 @@ def createChoc():
     return jsonify(dat)
 
 
-@app.route('/chocdb/chocolate/<chocId>', methods=['DELETE'])
+@app.route('/chocolate/<chocId>', methods=['DELETE'])
 def deleteChoc(chocId):
     em = [choc for choc in chocDB if (choc['id'] == chocId)]
     if len(em) == 0:
